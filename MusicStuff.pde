@@ -28,7 +28,7 @@ void setup()
   fullScreen(P3D);
   smooth();
   //color model
-  colorMode(HSB);
+  colorMode(RGB);
 
   //load minim library
   minim = new Minim(this);
@@ -50,7 +50,7 @@ void setup()
 
 void draw()
 {
-  noCursor();
+ // noCursor();
   smooth();
   background (0);
   lights();
@@ -61,7 +61,7 @@ void draw()
   //top and bottom reactive waves
   for (int i = 0; i < buffer.size(); i ++)
   {
-    stroke(0, map(i, 0, buffer.size(), 0, 255), map(i, 0, buffer.size(), 0, 255));
+    stroke(map(i, 235, buffer.size(), 0, 0),map(i, 253, buffer.size(), 255, 183), 255);
     lerpedBuffer[i] = lerp(lerpedBuffer[i], buffer.get(i), 0.05f);
     float sample = lerpedBuffer[i] * width * 0.3;
 
@@ -127,7 +127,7 @@ void draw()
     {
       noFill();
       PVector v1 = globe[i][j];
-      stroke(255, map(i, 0, buffer.size(), 167, 255), map(i, 0, buffer.size(), 167, 255));
+      stroke(map(i, 235, buffer.size(), 0, 0),map(i, 253, buffer.size(), 255, 183), 255);
       strokeWeight(5);
       vertex(v1.x, v1.y, v1.z);
       PVector v2 = globe[i+1][j];
@@ -159,16 +159,16 @@ void draw()
     fill (#BFBFBF, 67, 67);
     ellipse(b, n, player.left.get(i)*10, player.left.get(i)*5);
 
-    //red
-    fill (#a40e24);
+    //cyan
+    fill (#00FFFF);
     ellipse(x3, y3, player.left.get(i)*10, player.left.get(i)*10);
 
-    //grey
-    fill (#BFBFBF);
+    //white
+    fill (#FFFFFF);
     rect(b, n, player.right.get(i)*10, player.left.get(i)*10);
 
-    //grey
-    fill(#BFBFBF);
+    //white
+    fill(#FFFFFF);
     ellipse(x3, y3, player.right.get(i)*10, player.right.get(i)*10);
   }
 
