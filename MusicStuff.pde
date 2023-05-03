@@ -23,6 +23,7 @@ float lerpedAverage = 0;
 int total = 12;
 float n4;
 float n6;
+int which = 0;
 
 void setup()
 {
@@ -39,7 +40,7 @@ void setup()
   player = minim.loadFile("song.mp3", width);
 
   //plays the song
-  player.play();
+  //player.play();
 
   ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
   buffer = player.left;
@@ -52,7 +53,7 @@ void setup()
 
 void draw()
 {
-  //noCursor();
+  noCursor();
   smooth();
   background (0);
   lights();
@@ -123,11 +124,9 @@ void draw()
     beginShape(TRIANGLE_STRIP);
     for (int j = 0; j < total+1; j++)
     {
-      float hu = map(j, 0, total, 0, 255);
-      stroke(hu, 255, 255);
       noFill();
       PVector v1 = globe[i][j];
-      stroke(255);
+      stroke(255, map(i, 0, buffer.size(), 167, 255), map(i, 0, buffer.size(), 167, 255));
       strokeWeight(5);
       vertex(v1.x, v1.y, v1.z);
       PVector v2 = globe[i+1][j];
@@ -166,10 +165,28 @@ void draw()
 
     //grey
     fill(#BFBFBF);
-    rect(x3, y3, player.right.get(i)*1, player.right.get(i)*10);
+    ellipse(x3, y3, player.right.get(i)*10, player.right.get(i)*10);
   }
   
   //increment values
   n4 += 0.008;
   n6 += 0.04;
+}
+
+//Start and Play Button
+void keyPressed()
+{
+  
+  if (keyCode == ' ')
+  {
+    if ( player.isPlaying() )
+    {
+      player.pause();
+    }
+    else
+    {
+      player.rewind();
+      player.play();
+    }
+  }
 }
