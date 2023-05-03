@@ -12,11 +12,11 @@ AudioInput ai;
 
 float lerpedAverage = 0;
 float[] lerpedBuffer;
-float x = 0;
 
 void setup()
 {
   fullScreen(P3D);
+
 
   colorMode(HSB);
   //load minim library
@@ -33,7 +33,9 @@ void setup()
 
 void draw()
 {
-  background(0);
+  // noCursor();
+  smooth();
+  background (0);
 
   float halfH = height / 2;
   float halfW = width / 2;
@@ -47,16 +49,16 @@ void draw()
     lerpedBuffer[i] = lerp(lerpedBuffer[i], buffer.get(i), 0.05f);
     float sample = lerpedBuffer[i] * width * 0.3;
     float sample2 = lerpedBuffer[i] * height * 10;
-    
+
     //old code from example
     // stroke(map(i, 255, buffer.size(), 0, 255), 255, 255);
     // line(i, height / 2 - sample, i, height/2 + sample);
-    
+
     //top lines
-    line(halfW, height - sample, i, height + sample);
+    line(i, height - sample, i, height + sample);
     //bottom lines
-    line(halfW, 0 - sample, i, 0 + sample);
-    
+    line(i, 0 - sample, i, 0 + sample);
+
     stroke(0, 255, 255);
     //left line
     line(0, 0 - sample2, 0, height + sample2);
@@ -74,11 +76,6 @@ void draw()
   fill(map(lerpedAverage, 1, 1, 0, 255), 0, 255);
   float average = sum / buffer.size();
   lerpedAverage = lerp(lerpedAverage, average, 0.1f);
-
-  if (x > width - 10)
-  {
-    x =  - 10;
-  }
 
   ellipse(halfW, halfH, lerpedAverage * halfH, lerpedAverage * halfH);
 }
