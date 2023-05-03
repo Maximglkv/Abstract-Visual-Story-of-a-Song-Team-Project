@@ -1,3 +1,5 @@
+import peasy.*;
+
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -10,13 +12,17 @@ AudioPlayer player;
 AudioBuffer buffer;
 AudioInput ai;
 
+PeasyCam cam;
+
+PVector[][] globe;
+int total = 20;
+
 float lerpedAverage = 0;
 float[] lerpedBuffer;
 
 void setup()
 {
   fullScreen(P3D);
-
 
   colorMode(HSB);
   //load minim library
@@ -29,6 +35,8 @@ void setup()
   buffer = player.left;
 
   lerpedBuffer = new float[buffer.size()];
+  
+  globe = new PVector[total+1][total+1];
 }
 
 void draw()
@@ -36,9 +44,10 @@ void draw()
   // noCursor();
   smooth();
   background (0);
+  lights();
 
-  float halfH = height / 2;
-  float halfW = width / 2;
+  //float halfH = height / 2;
+  //float halfW = width / 2;
 
   strokeWeight(1);
 
@@ -77,5 +86,32 @@ void draw()
   float average = sum / buffer.size();
   lerpedAverage = lerp(lerpedAverage, average, 0.1f);
 
-  ellipse(halfW, halfH, lerpedAverage * halfH, lerpedAverage * halfH);
+ translate(width / 2, height/2);
+ float r = 300;
+  for (int i = 0; i < total+1; i++)
+  {
+    float latitude = map(i, 0, total, 0, PI);
+    for (int j = 0; j < total+1; j++)
+    {
+      float longitude = map(j, 0, total, 0, TWO_PI);
+      float x = r * sin(latitude) * cos(longitude);
+      float y = r * sin(latitude) * sin(longitude);
+      float z = r * cos(latitude);
+      globe[i][j] = new PVector(x, y, z);
+    }
+  }
+  for (int i = 0; i < total; i++)
+  {
+    beginShape(TRIANGLE_STRIP);
+    for (int j = 0; j < total+1; j++)
+    {
+      PVector v1 = globe[i][j];
+      stroke(255);
+      strokeWeight(5);
+      vertex(v1.x, v1.y, v1.z);
+      PVector v2 = globe[i+1][j];
+      vertex(v2.x, v2.y, v2.z);
+    }
+    endShape();
+  }
 }
