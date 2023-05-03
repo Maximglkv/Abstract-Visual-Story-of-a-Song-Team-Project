@@ -58,12 +58,13 @@ void draw()
   strokeWeight(1);
 
   //for loop
+  //top and bottom reactive waves
   for (int i = 0; i < buffer.size(); i ++)
   {
     stroke(0, map(i, 0, buffer.size(), 0, 255), map(i, 0, buffer.size(), 0, 255));
     lerpedBuffer[i] = lerp(lerpedBuffer[i], buffer.get(i), 0.05f);
     float sample = lerpedBuffer[i] * width * 0.3;
-    
+
     //old code from example
     // stroke(map(i, 255, buffer.size(), 0, 255), 255, 255);
     // line(i, height / 2 - sample, i, height/2 + sample);
@@ -81,12 +82,15 @@ void draw()
 
   //controls size of sphere
   float sum = 400;
-  
+
   for (int i = 0; i < buffer.size(); i ++)
   {
     sum += abs(buffer.get(i));
   }
+  //end of top and bottom reactive waves
 
+
+  //reactive sphere code starts here
   noStroke();
   fill(map(lerpedAverage, 1, 1, 0, 255), 0, 255);
   float average = sum / buffer.size();
@@ -94,14 +98,14 @@ void draw()
 
   //translate used to move sphere to centre of screen
   translate(width / 2, height/2);
-  
+
   //variable for radius of sphere
   float r = 300;
-  
+
   for (int i = 0; i < total+1; i++)
   {
     float latitude = map(i, 0, total, 0, PI);
-    
+
     //for loop
     for (int j = 0; j < total+1; j++)
     {
@@ -113,7 +117,7 @@ void draw()
       globe[i][j] = new PVector(x, y, z);
     }
   }
-  
+
   //for loop to make the vectors connect to each point and form a shape,
   //currently has noFill so won't show until its removed.
   for (int i = 0; i < total; i++)
@@ -131,7 +135,10 @@ void draw()
     }
     endShape();
   }
-
+  //reactive sphere code ends here
+  
+  
+  //ellipse and rect shooting out from the middle starts here
   //noStroke needed or its just a bunch of white boxes and ellipses
   noStroke();
 
@@ -147,9 +154,9 @@ void draw()
 
     float x3 = sin(radians(i))*(500/angle);
     float y3 = cos(radians(i))*(500/angle);
-    
+
     //greyer grey
-    fill (#BFBFBF,67,67);
+    fill (#BFBFBF, 67, 67);
     ellipse(b, n, player.left.get(i)*10, player.left.get(i)*5);
 
     //red
@@ -164,26 +171,27 @@ void draw()
     fill(#BFBFBF);
     ellipse(x3, y3, player.right.get(i)*10, player.right.get(i)*10);
   }
-  
+
   //increment values
   n4 += 0.008;
   n6 += 0.04;
+  //ellipse and rect shooting out from the middle ends here
 }
 
-//Start and Play Button
+//start and play button
 void keyPressed()
 {
-  
+
   if (keyCode == ' ')
   {
     if ( player.isPlaying() )
     {
       player.pause();
-    }
-    else
+    } else
     {
       player.rewind();
       player.play();
     }
   }
 }
+//end of start and play button
