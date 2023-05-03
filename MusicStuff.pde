@@ -17,8 +17,8 @@ float x = 0;
 void setup()
 {
   fullScreen(P3D);
-  
-  colorMode(RGB);
+
+  colorMode(HSB);
   //load minim library
   minim = new Minim(this);
   //loads song
@@ -34,22 +34,36 @@ void setup()
 void draw()
 {
   background(0);
-  
- float halfH = height / 2;
- float halfW = width / 2;
+
+  float halfH = height / 2;
+  float halfW = width / 2;
 
   strokeWeight(1);
-  
+
   for (int i = 0; i < buffer.size(); i ++)
   {
 
-   // stroke(map(i, 0, buffer.size(), 0, 255), 255, 255);
-   lerpedBuffer[i] = lerp(lerpedBuffer[i], buffer.get(i), 0.1f);
-    float sample = lerpedBuffer[i] * width * 0.5;
-    stroke(map(i, 255, buffer.size(), 0, 255), 255, 255);
-    line(i, height / 2 - sample, i, height/2 + sample);
+    stroke(0, map(i, 0, buffer.size(), 0, 255), map(i, 0, buffer.size(), 0, 255));
+    lerpedBuffer[i] = lerp(lerpedBuffer[i], buffer.get(i), 0.05f);
+    float sample = lerpedBuffer[i] * width * 0.3;
+    float sample2 = lerpedBuffer[i] * height * 10;
+    
+    //old code from example
+    // stroke(map(i, 255, buffer.size(), 0, 255), 255, 255);
+    // line(i, height / 2 - sample, i, height/2 + sample);
+    
+    //top lines
+    line(halfW, height - sample, i, height + sample);
+    //bottom lines
+    line(halfW, 0 - sample, i, 0 + sample);
+    
+    stroke(0, 255, 255);
+    //left line
+    line(0, 0 - sample2, 0, height + sample2);
+    //right line
+    line(width, 0 - sample2, width, height + sample2);
   }
-  
+
   float sum = 1000;
   for (int i = 0; i < buffer.size(); i ++)
   {
@@ -57,15 +71,14 @@ void draw()
   }
 
   noStroke();
-  fill(map(lerpedAverage, 0, 1, 0, 255), 255, 255);
+  fill(map(lerpedAverage, 1, 1, 0, 255), 0, 255);
   float average = sum / buffer.size();
   lerpedAverage = lerp(lerpedAverage, average, 0.1f);
-  
+
   if (x > width - 10)
   {
     x =  - 10;
   }
-    
+
   ellipse(halfW, halfH, lerpedAverage * halfH, lerpedAverage * halfH);
-  
 }
