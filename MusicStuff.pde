@@ -1,4 +1,3 @@
-import peasy.*;
 
 import ddf.minim.*;
 import ddf.minim.analysis.*;
@@ -11,8 +10,6 @@ Minim minim;
 AudioPlayer player;
 AudioBuffer buffer;
 AudioInput ai;
-
-PeasyCam cam;
 
 //arrays
 PVector[][] globe;
