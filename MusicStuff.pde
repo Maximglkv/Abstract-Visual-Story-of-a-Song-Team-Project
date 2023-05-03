@@ -64,6 +64,7 @@ void draw()
     stroke(map(i, 235, buffer.size(), 0, 0),map(i, 253, buffer.size(), 255, 183), 255);
     lerpedBuffer[i] = lerp(lerpedBuffer[i], buffer.get(i), 0.05f);
     float sample = lerpedBuffer[i] * width * 0.3;
+    float sample2 = lerpedBuffer[i] * width * 0.2;
 
     //old code from example
     // stroke(map(i, 255, buffer.size(), 0, 255), 255, 255);
@@ -73,6 +74,13 @@ void draw()
     line(i, height - sample, i, height + sample);
     //bottom lines
     line(i, 0 - sample, i, 0 + sample);
+    
+    stroke(255,255,255);
+    //2nd underneath it
+    //top lines
+    line(i, height - sample2, i, height + sample2);
+    //bottom lines
+    line(i, 0 - sample2, i, 0 + sample2);
 
     //left line
     //line(0, 0 - sample2, 0, height + sample2);
