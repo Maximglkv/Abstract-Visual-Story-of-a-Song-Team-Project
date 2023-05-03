@@ -41,4 +41,5 @@ I was by myself for this project so I am happy with how it looks and feels. I am
 
 # Youtube Video
 
-youtube video [![YouTube](https://www.youtube.com/watch?v=2VOU6OpSqvU)
+Link to youtube video:
+https://www.youtube.com/watch?v=2VOU6OpSqvU
