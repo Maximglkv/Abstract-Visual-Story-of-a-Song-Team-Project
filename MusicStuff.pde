@@ -50,7 +50,7 @@ void setup()
 
 void draw()
 {
- // noCursor();
+  noCursor();
   smooth();
   background (0);
   lights();
