@@ -32,13 +32,13 @@ https://github.com/skooter500/GP-2020-2021, used Audio Startup to begin my audio
 
 # How it works
 
-#Top and Bottom Waves
+# Top and Bottom Waves
 Line shape was used, it uses a map calculation to adjust the colors, I added an additional set of lines to create an outline for the original line. 
 
-#Sphere
+# Sphere
 Using a nested loop to calculate the longitude and latitude values, then I used a 2D array to store the vertices and add triangle strips.
 
-#Particle Effect
+# Particle Effect
 Ellipse and rectangles shootout using an increment and it uses a angle formula to shootout it from the centre in a circular way, its on a loop so it repeat its increment values.
 
 
