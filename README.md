@@ -30,6 +30,17 @@ Pressing 'space bar' after the song has finished will play the song again.
 # References
 https://github.com/skooter500/GP-2020-2021, used Audio Startup to begin my audio visualizer but have adjusted as needed.
 
+# How it works
+
+#Top and Bottom Waves
+Line shape was used, it uses a map calculation to adjust the colors, I added an additional set of lines to create an outline for the original line. 
+
+#Sphere
+Using a nested loop to calculate the longitude and latitude values, then I used a 2D array to store the vertices and add triangle strips.
+
+#Particle Effect
+Ellipse and rectangles shootout using an increment and it uses a angle formula to shootout it from the centre in a circular way, its on a loop so it repeat its increment values.
+
 
 # What I am most proud of in the assignment
 I am proud with how the sphere and waves turned out, I thought of the second layer of waves last minute for the project and thought it would be a cool feature. It ended up having an astonishing effect on the visualizer. I wish I could've done my original idea of a sphere spinning with the beat but it had been difficult, but I ended up learning a lot about how spheres are made with maths. I didn't figure out how to make it rotate but I settled for an alternative where the sphere only shows the outline of the vectors and its size would react with the music. I decided it would fit better so I am happy with it.
